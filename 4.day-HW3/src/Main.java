@@ -3,18 +3,22 @@ import Entity.Game;
 import Entity.Player;
 import Service.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
+        Set<Player> playerSet = new HashSet<>();
         VerificationService verificationService = new EdevletVerification();
         CampaignService campaignService = new CampaignServiceImp();
-        UserService userService = new UserServiceImpl();
+        UserService userService = new UserServiceImpl(playerSet);
         GameService gameService = new GameServiceImpl();
-        SaleService saleService = new SaleServiceImpl(verificationService);
+        SaleService saleService = new SaleServiceImpl(verificationService,userService);
 
         Player player = new Player(1,1234567890,"Samet","Toylan",1999);
 
         userService.addPlayer(player);
-        if (verificationService.verification(player))
+        if (verificationService.verification(player,userService.getPlayers()))
             System.out.println("Succesfuly login system");
         userService.updatePlayer(player,400);
 

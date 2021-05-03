@@ -6,15 +6,17 @@ import Entity.Player;
 
 public class SaleServiceImpl implements SaleService {
     private final VerificationService verificationService;
+    private final UserService userService;
     //Dependency Injection
-    public SaleServiceImpl(VerificationService verificationService) {
+    public SaleServiceImpl(VerificationService verificationService, UserService userService) {
         this.verificationService = verificationService;
+        this.userService = userService;
     }
 
     @Override
     public void saleWithCampaign(Game game, Player player, Campaign campaign) {
         boolean canBuy=true;
-        boolean verification = verificationService.verification(player);
+        boolean verification = verificationService.verification(player,userService.getPlayers());
         if (!verification){
             System.out.println("User couldn't login. Please login and try again.");
         }else {
@@ -29,7 +31,7 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public void saleWithOutCampaign(Game game, Player player) {
         boolean canBuy=true;
-        boolean verification = verificationService.verification(player);
+        boolean verification = verificationService.verification(player,userService.getPlayers());
         if (!verification) {
             System.out.println("User couldn't login. Please login and try again.");
         }else {

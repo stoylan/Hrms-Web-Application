@@ -3,12 +3,20 @@ package Service;
 import Entity.Game;
 import Entity.Player;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserServiceImpl implements UserService {
+    Set<Player> players;
+
+    public UserServiceImpl(Set<Player> players) {
+        this.players = players;
+    }
+
     @Override
     public void addPlayer(Player player) {
         System.out.println(player.getName() + " has added to system.");
+        players.add(player);
     }
 
     @Override
@@ -30,5 +38,8 @@ public class UserServiceImpl implements UserService {
         System.out.println("Account balance is $" + player.getOwnMoney());
     }
 
-
+    @Override
+    public Set<Player> getPlayers() {
+        return players;
+    }
 }

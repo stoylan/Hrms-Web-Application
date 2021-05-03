@@ -5,7 +5,7 @@ import Entity.Campaign;
 public class CampaignServiceImp implements CampaignService {
     @Override
     public void addCampaign(Campaign campaign) {
-        System.out.println("New campaign added."+ campaign.getContent() + " with %"+ campaign.getDiscountRate() + " discount.");
+        System.out.println("New campaign added. "+ campaign.getContent() + " with %"+ campaign.getDiscountRate() + " discount.");
     }
 
     @Override
