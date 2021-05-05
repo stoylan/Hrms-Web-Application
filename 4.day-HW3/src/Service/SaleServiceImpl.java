@@ -22,7 +22,7 @@ public class SaleServiceImpl implements SaleService {
         }else {
             int playerMoney = player.getOwnMoney();
             int gamePrice = game.getPrice();
-            int withDiscountGamePrice = gamePrice - gamePrice * (campaign.getDiscountRate() / 100);
+            int withDiscountGamePrice = (gamePrice - gamePrice * (campaign.getDiscountRate())/ 100);
             sale(game, player, canBuy, playerMoney, withDiscountGamePrice);
         }
 
@@ -48,7 +48,6 @@ public class SaleServiceImpl implements SaleService {
             canBuy = false;
         }
         if (canBuy) {
-            player.setOwnMoney(newPlayerMoney);
             player.setOwnMoney(newPlayerMoney);
             player.getOwnGames().add(game);
             System.out.println(player.getName() + " bought " + game.getName() + " with $"+gamePrice + " money left : $"+ player.getOwnMoney());
