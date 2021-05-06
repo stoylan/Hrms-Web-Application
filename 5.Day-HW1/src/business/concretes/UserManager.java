@@ -23,7 +23,7 @@ public class UserManager implements UserService {
         List<User> userList = userDao.getAllUsers();
         for (User user : userList){
             if (user.geteMail().equals(eMail) && user.getPassword().equals(password)) {
-                System.out.println("Succesfully login");
+                System.out.println(user.getFirstName() + " "+ user.getLastName() + " succesfully login.");
                 return;
             }
         }

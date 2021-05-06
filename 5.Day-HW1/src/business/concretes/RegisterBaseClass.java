@@ -14,8 +14,7 @@ public abstract class RegisterBaseClass implements IUserRegisterService {
     @Override
     public void register(User user) {
         if (checkRegister(user)){
-            System.out.println("Succesfully registered to the system.");
-            System.out.println("The verification email has been sent to your e-mail. Please verify to login.");
+            System.out.println(user.getFirstName()+" "+user.getLastName()+" succesfully registered to the system. The verification email has been sent to your e-mail. Please verify to login.");
 
             userDao.save(user);
         }else{
