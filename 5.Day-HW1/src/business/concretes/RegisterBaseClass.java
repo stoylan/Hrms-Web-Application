@@ -5,18 +5,19 @@ import dataAccess.abstracts.UserDao;
 import entities.concrets.User;
 
 public abstract class RegisterBaseClass implements IUserRegisterService {
-    private final UserDao userDao;
+    protected final UserManager userManager;
 
-    protected RegisterBaseClass(UserDao userDao) {
-        this.userDao = userDao;
+    public RegisterBaseClass(UserManager userManager) {
+        this.userManager = userManager;
     }
+
 
     @Override
     public void register(User user) {
         if (checkRegister(user)){
             System.out.println(user.getFirstName()+" "+user.getLastName()+" succesfully registered to the system. The verification email has been sent to your e-mail. Please verify to login.");
 
-            userDao.save(user);
+            userManager.save(user);
         }else{
             System.out.println("You entered wrong information. Try again.");
         }

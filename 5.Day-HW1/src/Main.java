@@ -12,8 +12,8 @@ public class Main {
         User user = new User(1,"Samet","Toylan","toylansamet@gmail.com","123456");
         User user2 = new User(2,"Engin","Demiroğ","engindemirog@gmail.com","987654");
         UserDao userDao = new HibernateUserDao();
-        IUserRegisterService normalRegister = new UserRegisterService(userDao);
-        UserService userService = new UserManager(userDao,normalRegister);
+        UserService userService = new UserManager(userDao);
+        IUserRegisterService normalRegister = new UserRegisterService(new UserManager(userDao));
 
         normalRegister.register(user);
 
@@ -21,7 +21,7 @@ public class Main {
 
         userService.login("toylansamet@gmail.com","123456");
 
-        IUserRegisterService googleRegister = new UserGoogleRegisterService(userDao);
+        IUserRegisterService googleRegister = new UserGoogleRegisterService(new UserManager(userDao));
 
         googleRegister.register(user2);
 

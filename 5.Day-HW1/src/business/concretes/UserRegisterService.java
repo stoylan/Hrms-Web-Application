@@ -8,11 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserRegisterService extends RegisterBaseClass {
-    private final UserDao userDao;
 
-    public UserRegisterService(UserDao userDao) {
-        super(userDao);
-        this.userDao = userDao;
+
+    public UserRegisterService(UserManager userManager) {
+        super(userManager);
     }
 
     @Override
@@ -25,7 +24,7 @@ public class UserRegisterService extends RegisterBaseClass {
             //email validation control
             Matcher matcher = pattern.matcher(user.geteMail());
 
-            List<User> list = userDao.getAllUsers();
+            List<User> list = userManager.getAllUsers();
             for (User user1 : list){
                 if (user1.geteMail().equals(user.geteMail())) {
                     eMailHasUsed = true;

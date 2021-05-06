@@ -6,8 +6,8 @@ import entities.concrets.User;
 public class UserGoogleRegisterService extends RegisterBaseClass {
 
 
-    public UserGoogleRegisterService(UserDao userDao) {
-        super(userDao);
+    public UserGoogleRegisterService(UserManager userManager) {
+        super(userManager);
     }
 
     @Override
