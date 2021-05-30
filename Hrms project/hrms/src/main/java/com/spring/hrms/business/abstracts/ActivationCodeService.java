@@ -4,9 +4,11 @@ import com.spring.hrms.core.utilities.results.DataResult;
 import com.spring.hrms.entities.abstracts.ActivationCodes;
 import com.spring.hrms.entities.abstracts.User;
 import com.spring.hrms.entities.concretes.*;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface ActivationCodeService {
-    DataResult activateCandidateAccountByEmail(Candidate candidate,String activationCode);
-    DataResult activateEmployerAccountByEmail(Employer Employer, String activationCode);
-    DataResult activateEmployerAccountByHrmsPersonal(Employer employer, Employee employee);
+    DataResult activateCandidateAccountByEmail(int candidateId);
+    DataResult activateEmployerAccountByEmail(int employerId);
+    DataResult activateEmployerAccountByHrmsPersonal(int employerId, int employeeId);
 }

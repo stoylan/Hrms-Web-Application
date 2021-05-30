@@ -1,9 +1,11 @@
 package com.spring.hrms.api.controller;
 
+import com.spring.hrms.business.abstracts.ActivationCodeService;
 import com.spring.hrms.business.abstracts.CandidateRegisterService;
 import com.spring.hrms.business.abstracts.CandidateService;
 import com.spring.hrms.core.utilities.results.DataResult;
 import com.spring.hrms.core.utilities.results.Result;
+import com.spring.hrms.entities.concretes.ActivationCodeCandidate;
 import com.spring.hrms.entities.concretes.Candidate;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class CandidateController {
     private final CandidateService candidateService;
     private final CandidateRegisterService candidateRegisterService;
+    private final ActivationCodeService activationCodeService;
 
-    public CandidateController(CandidateService candidateService, CandidateRegisterService candidateRegisterService) {
+    public CandidateController(CandidateService candidateService, CandidateRegisterService candidateRegisterService, ActivationCodeService activationCodeService) {
         this.candidateService = candidateService;
         this.candidateRegisterService = candidateRegisterService;
+        this.activationCodeService = activationCodeService;
     }
 
     @GetMapping("/getall")
@@ -27,5 +31,7 @@ public class CandidateController {
     public Result add(@RequestBody Candidate candidate) throws Exception {
         return candidateRegisterService.register(candidate);
     }
+
+
 
 }

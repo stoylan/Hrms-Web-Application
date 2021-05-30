@@ -4,10 +4,13 @@ import com.spring.hrms.adapter.abstracts.ServiceAdapter;
 import com.spring.hrms.business.abstracts.ActivationCodeService;
 import com.spring.hrms.business.abstracts.CandidateRegisterService;
 import com.spring.hrms.core.utilities.results.*;
+import com.spring.hrms.dataAccess.abstracts.ActivationCodeCandidateRepository;
 import com.spring.hrms.dataAccess.abstracts.CandidateRepository;
+import com.spring.hrms.entities.concretes.ActivationCodeCandidate;
 import com.spring.hrms.entities.concretes.Candidate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,11 +19,13 @@ public class CandidateRegisterServiceImpl implements CandidateRegisterService {
     private final CandidateRepository candidateRepository;
     private final ServiceAdapter serviceAdapter;
     private final ActivationCodeService activationCodeService;
+    private final ActivationCodeCandidateRepository activationCodeCandidateRepository;
 
-    public CandidateRegisterServiceImpl(CandidateRepository candidateRepository, ServiceAdapter serviceAdapter, ActivationCodeService activationCodeService) {
+    public CandidateRegisterServiceImpl(CandidateRepository candidateRepository, ServiceAdapter serviceAdapter, ActivationCodeService activationCodeService, ActivationCodeCandidateRepository activationCodeCandidateRepository) {
         this.candidateRepository = candidateRepository;
         this.serviceAdapter = serviceAdapter;
         this.activationCodeService = activationCodeService;
+        this.activationCodeCandidateRepository = activationCodeCandidateRepository;
     }
 
     @Override
@@ -33,8 +38,9 @@ public class CandidateRegisterServiceImpl implements CandidateRegisterService {
             return new ErrorDataResult("Entered password doesn't match. Try again");
         if (!notNullFields(candidate))
             return new ErrorDataResult("All field must be filled");
+
         candidateRepository.save(candidate);
-        activationCodeService.activateCandidateAccountByEmail(candidate,"afff5aa472sssb");
+
         return new SuccessDataResult<>(candidate, "Succesfully registered to the system. Please verify your account from e-mail.");
     }
 

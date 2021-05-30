@@ -16,15 +16,23 @@ public class EmployerActivationByEmployee {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "employer_id")
+  /*  @Column(name = "employer_id")
     private int employerId;
 
     @Column(name = "employee_id")
-    private int employeeId;
+    private int employeeId;*/
 
     @Column(name = "is_confirmed")
     private boolean isConfirmed;
 
     @Column(name = "confirmed_date")
     private Date confirmedDate;
+
+    @OneToOne
+    @JoinColumn(name = "employer_id")
+    private Employer employer;
+
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 }
