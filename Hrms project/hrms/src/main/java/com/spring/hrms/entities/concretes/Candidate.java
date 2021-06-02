@@ -2,18 +2,23 @@ package com.spring.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.hrms.entities.abstracts.User;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="candidates")
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","activationCodeCandidate"})
+@EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","activationCodeCandidate","educations","candidate","cv"})
 public class Candidate extends User {
 
     @Column(name = "first_name")
@@ -28,6 +33,39 @@ public class Candidate extends User {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @OneToOne(mappedBy = "candidate")
+    @OneToOne(mappedBy = "candidate",fetch = FetchType.LAZY)
+    @ApiModelProperty(hidden = true)
     private ActivationCodeCandidate activationCodeCandidate;
+
+    @OneToMany(mappedBy = "candidate")
+    //@ApiModelProperty(hidden = true)
+    private List<Education> educations;
+
+    @OneToMany(mappedBy = "candidate")
+    //@ApiModelProperty(hidden = true)
+    private List<JobExperiences> jobExperiences;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    //@ApiModelProperty(hidden = true)
+    private List<Language> language;
+
+    @OneToOne(mappedBy = "candidate")
+    @ApiModelProperty(hidden = true)
+    private Cv cv;
+
+    public Candidate(int id,String email,String password,String firstName, String lastName, String nationalityNumber, Date birthDate, ActivationCodeCandidate activationCodeCandidate, List<Education> educations, List<JobExperiences> jobExperiences, List<Language> language, Cv cv) {
+        super();
+        this.setId(id);
+        this.setEMail(email);;
+        this.setPassword(password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationalityNumber = nationalityNumber;
+        this.birthDate = birthDate;
+        this.activationCodeCandidate = activationCodeCandidate;
+        this.educations = educations;
+        this.jobExperiences = jobExperiences;
+        this.language = language;
+        this.cv = cv;
+    }
 }

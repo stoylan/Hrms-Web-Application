@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","employer"})
 public class ActivationCodeEmployer extends ActivationCodes {
- //   private int employerId;
 
     @OneToOne
     @JoinColumn(name = "employer_id")

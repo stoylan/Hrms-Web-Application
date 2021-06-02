@@ -16,9 +16,6 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidate"})
 public class ActivationCodeCandidate extends ActivationCodes {
 
-   // @Column(name = "candidate_id")
-   // private int candidateId;
-
     @OneToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;

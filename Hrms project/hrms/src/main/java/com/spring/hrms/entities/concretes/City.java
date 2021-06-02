@@ -1,6 +1,7 @@
 package com.spring.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ public class City {
     private String cityName;
 
     @OneToMany(mappedBy = "city")
+    @ApiModelProperty(hidden = true)
     private List<JobAdvertisement> jobAdvertisement;
 }

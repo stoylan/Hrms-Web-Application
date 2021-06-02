@@ -1,4 +1,4 @@
-package com.spring.hrms.core.utilities.mernisService;
+package com.spring.hrms.core.services.mernisService;
 
 //----------------------------------------------------
 //

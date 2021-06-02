@@ -1,7 +1,7 @@
 package com.spring.hrms.adapter.concretes;
 
 import com.spring.hrms.adapter.abstracts.ServiceAdapter;
-import com.spring.hrms.core.utilities.mernisService.RMFKPSPublicSoap;
+import com.spring.hrms.core.services.mernisService.RMFKPSPublicSoap;
 import com.spring.hrms.entities.concretes.Candidate;
 import org.springframework.stereotype.Service;
 

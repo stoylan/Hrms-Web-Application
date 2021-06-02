@@ -1,4 +1,4 @@
-package com.spring.hrms.core.utilities.mernisService;
+package com.spring.hrms.core.services.mernisService;
 
 //----------------------------------------------------
 //
@@ -13,16 +13,12 @@ package com.spring.hrms.core.utilities.mernisService;
 
 import org.ksoap2.HeaderProperty;
 import org.ksoap2.serialization.*;
-import org.ksoap2.transport.*;
-import org.kxml2.kdom.Element;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
-public class RMFKPSPublicSoap12
+public class RMFKPSPublicSoap
 {
     interface RMFIWcfMethod
     {
@@ -39,14 +35,14 @@ public class RMFKPSPublicSoap12
     public boolean enableLogging;
 
 
-    public RMFKPSPublicSoap12(){}
+    public RMFKPSPublicSoap(){}
 
-    public RMFKPSPublicSoap12(String url)
+    public RMFKPSPublicSoap(String url)
     {
         this.url = url;
     }
 
-    public RMFKPSPublicSoap12(String url,int timeOut)
+    public RMFKPSPublicSoap(String url,int timeOut)
     {
         this.url = url;
         this.timeOut=timeOut;
@@ -81,7 +77,7 @@ public class RMFKPSPublicSoap12
 
     protected RMFExtendedSoapSerializationEnvelope createEnvelope()
     {
-        RMFExtendedSoapSerializationEnvelope envelope= new RMFExtendedSoapSerializationEnvelope(RMFExtendedSoapSerializationEnvelope.VER12);
+        RMFExtendedSoapSerializationEnvelope envelope= new RMFExtendedSoapSerializationEnvelope(RMFExtendedSoapSerializationEnvelope.VER11);
         envelope.enableLogging = enableLogging;
     
         return envelope;

@@ -16,11 +16,6 @@ public class EmployerActivationByEmployee {
     @Column(name = "id")
     private int id;
 
-  /*  @Column(name = "employer_id")
-    private int employerId;
-
-    @Column(name = "employee_id")
-    private int employeeId;*/
 
     @Column(name = "is_confirmed")
     private boolean isConfirmed;

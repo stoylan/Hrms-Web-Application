@@ -1,6 +1,7 @@
 package com.spring.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,6 +55,7 @@ public class JobAdvertisement {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="publish_date", updatable = false)
+    @ApiModelProperty(hidden = true)
     private Date publishDate;
 
     @ManyToOne

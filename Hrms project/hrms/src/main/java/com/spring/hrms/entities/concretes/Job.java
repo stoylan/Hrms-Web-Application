@@ -1,5 +1,6 @@
 package com.spring.hrms.entities.concretes;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,12 +17,19 @@ public class Job {
     @Column(name="id")
     private int id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name="position")
     private String position;
 
     @OneToMany(mappedBy = "job")
+    @ApiModelProperty(hidden = true)
     private List<JobAdvertisement> jobAdvertisement;
 
+    @OneToOne(mappedBy = "job")
+    @ApiModelProperty(hidden = true)
+    private JobExperiences jobExperiences;
 
 
 

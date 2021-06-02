@@ -2,6 +2,7 @@ package com.spring.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.hrms.entities.abstracts.User;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,8 @@ public class Employee extends User {
     private String lastName;
 
     @OneToOne(mappedBy = "employee")
+    @ApiModelProperty(hidden = true)
     private EmployerActivationByEmployee employerActivationByEmployee;
+
+
 }
