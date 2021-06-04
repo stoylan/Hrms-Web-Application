@@ -10,6 +10,7 @@ import java.util.List;
 public interface CandidateService {
     DataResult<Candidate> getAll();
     DataResult add(Candidate candidate);
+    DataResult delete(int candidateId);
 
 
 }

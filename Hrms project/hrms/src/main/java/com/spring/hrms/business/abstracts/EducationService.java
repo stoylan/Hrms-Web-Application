@@ -9,7 +9,9 @@ import javax.xml.crypto.Data;
 import java.util.List;
 
 public interface EducationService {
-    DataResult<Education> add(Education education);
+    DataResult<Education> add(Education education,int candidateId);
     DataResult<List<SortedEducationWithCandidate>> SortedEducationWithCandidate(int candidateId);
+    DataResult<List<Education>> SortedEducation(int candidateId);
+
 
 }

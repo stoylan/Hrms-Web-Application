@@ -1,5 +1,6 @@
 package com.spring.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -14,11 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cv")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidate"})
 public class Cv {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @Column(name = "description")
@@ -38,7 +40,7 @@ public class Cv {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "candidate_id")
-    //@ApiModelProperty(hidden = true)
+    @JsonIgnore()
     private Candidate candidate;
 
 

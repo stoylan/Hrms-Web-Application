@@ -18,8 +18,8 @@ public class JobExperienceController {
     }
 
     @PostMapping("/add")
-    public DataResult<JobExperiences> add(@RequestBody JobExperiences jobExperiences){
-        return jobExperiencesService.add(jobExperiences);
+    public DataResult<JobExperiences> add(@RequestBody JobExperiences jobExperiences,@RequestParam int candidateId){
+        return jobExperiencesService.add(jobExperiences,candidateId);
     }
 
     @GetMapping("/getAllByReverseSortJobExperience")

@@ -8,6 +8,8 @@ import com.spring.hrms.entities.dto.SortedJobExperiencesWithCandidate;
 import java.util.List;
 
 public interface JobExperiencesService {
-    DataResult<JobExperiences> add(JobExperiences jobExperiences);
+    DataResult<JobExperiences> add(JobExperiences jobExperiences,int candidateId);
     DataResult<List<SortedJobExperiencesWithCandidate>> SortedJobExperiencesWithCandidate(int candidateId);
+    DataResult<List<JobExperiences>> SortedJobExperiences(int candidateId);
+
 }

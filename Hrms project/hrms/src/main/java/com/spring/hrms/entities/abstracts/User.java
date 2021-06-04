@@ -1,5 +1,6 @@
 package com.spring.hrms.entities.abstracts;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @Column(name = "email")

@@ -32,6 +32,11 @@ public class CandidateController {
         return candidateRegisterService.register(candidate);
     }
 
+    @DeleteMapping("/delete")
+    public DataResult add(@RequestParam int candidateId) {
+        return candidateService.delete(candidateId);
+    }
+
 
 
 }

@@ -15,13 +15,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobExperiences"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobExperiences","candidate"})
 public class JobExperiences {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name ="job_id")
     @NotNull
     @NotBlank
@@ -37,6 +38,7 @@ public class JobExperiences {
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
+    @ApiModelProperty(hidden = true)
     private Candidate candidate;
 
 

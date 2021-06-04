@@ -18,7 +18,7 @@ public class SortedJobExperiencesWithCandidate {
     private String jobName;
     private String position;
     private Date startYear;
-    private String finishYear;
+    private String graduateYear;
 
     public SortedJobExperiencesWithCandidate(int id, String candidateName, String candidateSurname, String jobName,String position, Date startYear, Date finishYear) {
         this.id = id;
@@ -28,10 +28,10 @@ public class SortedJobExperiencesWithCandidate {
         this.position = position;
         this.startYear = startYear;
         if (finishYear == null){
-            this.finishYear = "Okuyor";
+            this.graduateYear = "Okuyor";
         }else {
             int year = getYear(finishYear);
-            this.finishYear = String.valueOf(year);
+            this.graduateYear = String.valueOf(year);
         }
     }
     private int getYear(Date date){

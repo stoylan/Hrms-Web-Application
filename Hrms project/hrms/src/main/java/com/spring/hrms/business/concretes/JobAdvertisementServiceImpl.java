@@ -5,17 +5,21 @@ import com.spring.hrms.core.utilities.results.*;
 import com.spring.hrms.dataAccess.abstracts.CityRepository;
 import com.spring.hrms.dataAccess.abstracts.EmployerRepository;
 import com.spring.hrms.dataAccess.abstracts.JobAdvertisementRepository;
+import com.spring.hrms.dataAccess.abstracts.JobRepository;
+import com.spring.hrms.entities.concretes.Job;
 import com.spring.hrms.entities.concretes.JobAdvertisement;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobAdvertisementServiceImpl implements JobAdvertisementService {
     private JobAdvertisementRepository jobAdvertisementRepository;
     private EmployerRepository employerRepository;
     private CityRepository cityRepository;
+    private JobRepository jobRepository;
 
     public JobAdvertisementServiceImpl(JobAdvertisementRepository jobAdvertisementRepository, EmployerRepository employerRepository, CityRepository cityRepository) {
         this.jobAdvertisementRepository = jobAdvertisementRepository;

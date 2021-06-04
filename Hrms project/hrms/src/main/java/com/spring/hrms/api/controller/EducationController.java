@@ -19,8 +19,8 @@ public class EducationController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Education education){
-        return educationService.add(education);
+    public Result add(@RequestBody Education education,@RequestParam int candidateId){
+        return educationService.add(education,candidateId);
     }
 
     @GetMapping("/getAllByReverseSortGraduate")

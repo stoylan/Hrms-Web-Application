@@ -15,11 +15,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Table(name = "languages")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","educations","candidate.activationCodeCandidate","candidate","language"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidate"})
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @Column(name = "language")
@@ -32,7 +33,9 @@ public class Language {
     @NotNull
     private int level;
 
+
     @ManyToOne
     @JoinColumn(name = "candidate_id")
+    @ApiModelProperty(hidden = true)
     private Candidate candidate;
 }

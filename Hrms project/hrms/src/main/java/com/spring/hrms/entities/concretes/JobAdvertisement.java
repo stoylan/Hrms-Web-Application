@@ -24,6 +24,7 @@ public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @ManyToOne

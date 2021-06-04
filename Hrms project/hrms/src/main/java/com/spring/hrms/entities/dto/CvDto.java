@@ -1,22 +1,24 @@
 package com.spring.hrms.entities.dto;
 
-import com.spring.hrms.entities.concretes.Candidate;
-import com.spring.hrms.entities.concretes.City;
-import com.spring.hrms.entities.concretes.Education;
-import com.spring.hrms.entities.concretes.JobExperiences;
+import com.spring.hrms.entities.concretes.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CvDto {
-    private int id;
+    private Candidate candidate;
     private String description;
     private String githubAddress;
     private String linkedinAddress;
     private String technologies;
     private String coverLetter;
-    private Candidate candidate;
-    private Education education;
-    private City city;
-    private JobExperiences jobExperiences;
+    private List<Education> educationList;
+    private List<JobExperiences> jobExperiences;
+    private List<Language> languageList;
 
 }

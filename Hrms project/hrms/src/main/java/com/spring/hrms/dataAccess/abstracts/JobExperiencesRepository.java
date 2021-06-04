@@ -16,4 +16,6 @@ public interface JobExperiencesRepository extends JpaRepository<JobExperiences,I
             "from JobExperiences c inner join c.candidate p where c.candidate.id = :candidateId")
     List<SortedJobExperiencesWithCandidate> getSortedJobExperienceInformation(int candidateId, Sort sort);
 
+    List<JobExperiences> getAllByCandidateIdOrderByFinishYearDesc(int candidateId);
+
 }

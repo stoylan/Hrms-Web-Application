@@ -28,7 +28,12 @@ public class CandidateServiceImpl implements CandidateService {
     public DataResult add(Candidate candidate) {
         candidateRepository.save(candidate);
         return new SuccessDataResult(candidate,"The candidate added.");
+    }
 
+    @Override
+    public DataResult delete(int candidateId) {
+        candidateRepository.deleteById(candidateId);
+        return new SuccessDataResult(candidateId,"Succesfuly deleted");
     }
 
 

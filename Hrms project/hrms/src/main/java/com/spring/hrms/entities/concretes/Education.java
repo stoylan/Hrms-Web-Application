@@ -2,6 +2,7 @@ package com.spring.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -22,6 +23,7 @@ public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(hidden = true)
     private int id;
 
     @NotNull
@@ -40,16 +42,21 @@ public class Education {
     private Date startDate;
 
     @Column(name = "finish_date")
-    private Date finishDate;
+    private String finishDate;
 
     @Column(name = "status")
     private String status;
 
     @ManyToOne( cascade=CascadeType.ALL)
     @JoinColumn(name = "candidate_id")
+    @ApiModelProperty(hidden = true)
     private Candidate candidate;
 
-
-
+    public String getFinishDate() {
+        if (finishDate == null){
+            this.finishDate = "Okuyor";
+        }
+        return finishDate;
+    }
 
 }

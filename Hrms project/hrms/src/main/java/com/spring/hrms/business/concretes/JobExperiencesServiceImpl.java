@@ -27,9 +27,11 @@ public class JobExperiencesServiceImpl implements JobExperiencesService {
     }
 
     @Override
-    public DataResult<JobExperiences> add(JobExperiences jobExperiences) {
-        Candidate candidate = candidateRepository.findById(jobExperiences.getCandidate().getId()).get();
+    public DataResult<JobExperiences> add(JobExperiences jobExperiences,int candidateId) {
+        Candidate candidate = candidateRepository.findById(candidateId).get();
         jobExperiences.setCandidate(candidate);
+        candidate.getJobExperiences().add(jobExperiences);
+        candidateRepository.save(candidate);
         jobExperiencesRepository.save(jobExperiences);
         return new SuccessDataResult(jobExperiences,"Succesfully added to the system.");
     }
@@ -39,6 +41,13 @@ public class JobExperiencesServiceImpl implements JobExperiencesService {
         Sort sort = Sort.by(Sort.Direction.DESC, "finishYear");
         return new SuccessDataResult<List<SortedJobExperiencesWithCandidate>>
                 (this.jobExperiencesRepository.getSortedJobExperienceInformation(candidateId,sort), "All educations listed with sorting descending order.");
+
+    }
+
+    @Override
+    public DataResult<List<JobExperiences>> SortedJobExperiences(int candidateId) {
+        return new SuccessDataResult<List<JobExperiences>>
+                (this.jobExperiencesRepository.getAllByCandidateIdOrderByFinishYearDesc(candidateId), "All educations listed with sorting descending order.");
 
     }
 }
