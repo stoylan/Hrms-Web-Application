@@ -50,6 +50,14 @@ public class JobAdvertisement {
     private Date lastApplyDate;
 
     @ManyToOne
+    @JoinColumn(name = "work_time")
+    private WorkTimeOfJob workTimeOfJobs;
+
+    @ManyToOne
+    @JoinColumn(name = "work_type")
+    private WorkTypeOfJob workTypeOfJobs;
+
+    @ManyToOne
     @JoinColumn(name = "employer_id")
     private Employer employer;
 

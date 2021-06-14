@@ -27,6 +27,7 @@ public class Job {
     @Column(name="position")
     private String position;
 
+
     @OneToMany(mappedBy = "job")
     @ApiModelProperty(hidden = true)
     private List<JobAdvertisement> jobAdvertisement;

@@ -4,12 +4,14 @@ import com.spring.hrms.business.abstracts.JobAdvertisementService;
 import com.spring.hrms.core.utilities.results.DataResult;
 import com.spring.hrms.core.utilities.results.Result;
 import com.spring.hrms.entities.concretes.JobAdvertisement;
+import com.spring.hrms.entities.dto.JobAdvDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobadvertisements")
+@CrossOrigin
 public class JobAdvertisementController {
 
     private final JobAdvertisementService jobAdvertisementService;
@@ -28,6 +30,16 @@ public class JobAdvertisementController {
         return this.jobAdvertisementService.getAllSorted();
     }
 
+    @GetMapping("/getAllNotActivated")
+    DataResult<List<JobAdvertisement>> getAllNotActivated() {
+        return this.jobAdvertisementService.getAllNotActived();
+    }
+
+    @GetMapping("/getByJobAdvertisementId")
+    DataResult<JobAdvertisement> getByJobAdvertisementId(int jobAdvertisementId){
+        return this.jobAdvertisementService.getByJobAdvertisementId(jobAdvertisementId);
+    }
+
     @PostMapping("/getAllByCompanyName")
     DataResult<List<JobAdvertisement>> getAllByCompanyName(@RequestParam String companyName) {
         return this.jobAdvertisementService.getAllByCompanyName(companyName);
@@ -44,7 +56,9 @@ public class JobAdvertisementController {
     }
 
     @PostMapping("/add")
-    Result add(@RequestBody JobAdvertisement jobAdvertisement) {
-        return this.jobAdvertisementService.add(jobAdvertisement);
+    Result add(@RequestBody JobAdvDto jobAdvDto) {
+        return this.jobAdvertisementService.add(jobAdvDto);
     }
+
+
 }

@@ -13,4 +13,6 @@ public interface JobAdvertisementRepository extends JpaRepository<JobAdvertiseme
     List<JobAdvertisement> getAllByActivationStatusTrue(Sort sort);
     List<JobAdvertisement> getAllByEmployerId(int id);
     List<JobAdvertisement> getAllByEmployer_CompanyName(String companyName);
+    List<JobAdvertisement> getAllByActivationStatusFalse();
+
 }

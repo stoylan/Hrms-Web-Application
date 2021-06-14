@@ -2,29 +2,30 @@ package com.spring.hrms.business.concretes;
 
 import com.spring.hrms.business.abstracts.JobAdvertisementService;
 import com.spring.hrms.core.utilities.results.*;
-import com.spring.hrms.dataAccess.abstracts.CityRepository;
-import com.spring.hrms.dataAccess.abstracts.EmployerRepository;
-import com.spring.hrms.dataAccess.abstracts.JobAdvertisementRepository;
-import com.spring.hrms.dataAccess.abstracts.JobRepository;
-import com.spring.hrms.entities.concretes.Job;
+import com.spring.hrms.dataAccess.abstracts.*;
 import com.spring.hrms.entities.concretes.JobAdvertisement;
+import com.spring.hrms.entities.dto.JobAdvDto;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobAdvertisementServiceImpl implements JobAdvertisementService {
-    private JobAdvertisementRepository jobAdvertisementRepository;
-    private EmployerRepository employerRepository;
-    private CityRepository cityRepository;
-    private JobRepository jobRepository;
+    private final JobAdvertisementRepository jobAdvertisementRepository;
+    private final EmployerRepository employerRepository;
+    private final CityRepository cityRepository;
+    private final JobRepository jobRepository;
+    private final WorkTimeOfJobRepository workTimeOfJobRepository;
+    private final WorkTypeOfJobRepository workTypeOfJobRepository;
 
-    public JobAdvertisementServiceImpl(JobAdvertisementRepository jobAdvertisementRepository, EmployerRepository employerRepository, CityRepository cityRepository) {
+    public JobAdvertisementServiceImpl(JobAdvertisementRepository jobAdvertisementRepository, EmployerRepository employerRepository, CityRepository cityRepository, JobRepository jobRepository, WorkTimeOfJobRepository workTimeOfJobRepository, WorkTypeOfJobRepository workTypeOfJobRepository) {
         this.jobAdvertisementRepository = jobAdvertisementRepository;
         this.cityRepository = cityRepository;
         this.employerRepository = employerRepository;
+        this.jobRepository = jobRepository;
+        this.workTimeOfJobRepository = workTimeOfJobRepository;
+        this.workTypeOfJobRepository = workTypeOfJobRepository;
     }
 
     @Override
@@ -61,27 +62,38 @@ public class JobAdvertisementServiceImpl implements JobAdvertisementService {
     }
 
     @Override
-    public Result add(JobAdvertisement jobAdvertisement) {
-      /*  if (!isAllFieldsFilled(jobAdvertisement)) {
-            return new ErrorResult("All fields must be filled");
-        }
+    public DataResult<JobAdvertisement> getByJobAdvertisementId(int jobAdvertisementId) {
+        JobAdvertisement jobAdvertisement = jobAdvertisementRepository.findById(jobAdvertisementId).stream().findFirst().get();
+        return new SuccessDataResult<JobAdvertisement>
+                (jobAdvertisement, "Succesfully get job advertisement by id");
+    }
 
-        if (!isCityExist(jobAdvertisement)) {
-            return new ErrorResult("City is not exist. Please enter valid city.");
-        }
+    @Override
+    public DataResult<List<JobAdvertisement>> getAllNotActived() {
+        return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementRepository.getAllByActivationStatusFalse());
+    }
 
-        if (!isExistEmployer(jobAdvertisement)) {
-            return new ErrorResult("Employer is not exist.");
-        }
 
-        if (!isNumberOfPositionDefined(jobAdvertisement)) {
-            return new ErrorResult("You must have at least 1 number of position.");
-        }
+    @Override
+    public Result add(JobAdvDto JobAdvDto) {
+        JobAdvertisement jobAdvertisementTemp = new JobAdvertisement();
+        jobAdvertisementTemp.setJobDescription(JobAdvDto.getJobDescription());
+        jobAdvertisementTemp.setActivationStatus(false);
+        jobAdvertisementTemp.setId(0);
+        jobAdvertisementTemp.setLastApplyDate(JobAdvDto.getLastApplyDate());
+        jobAdvertisementTemp.setMinWage(JobAdvDto.getMinWage());
+        jobAdvertisementTemp.setMaxWage(JobAdvDto.getMaxWage());
+        jobAdvertisementTemp.setNumberOfPosition(JobAdvDto.getNumberOfPosition());
+        jobAdvertisementTemp.setPublishDate(JobAdvDto.getPublishDate());
+        jobAdvertisementTemp.setWorkTypeOfJobs(workTypeOfJobRepository.findById(JobAdvDto.getWorkTypeId()).get());
+        jobAdvertisementTemp.setCity(cityRepository.findById(JobAdvDto.getCityId()).get());
+        jobAdvertisementTemp.setEmployer(employerRepository.findById(JobAdvDto.getEmployerId()).get());
+        jobAdvertisementTemp.setJob(jobRepository.findById(JobAdvDto.getJobId()).get());
+        jobAdvertisementTemp.setWorkTimeOfJobs(workTimeOfJobRepository.findById(JobAdvDto.getWorkTimeId()).get());
 
-        else {*/
-            this.jobAdvertisementRepository.save(jobAdvertisement);
-            return new SuccessResult("Successfully Added!");
-        //}
+        this.jobAdvertisementRepository.save(jobAdvertisementTemp);
+        return new SuccessResult("Successfully Added!");
+
     }
 
     @Override

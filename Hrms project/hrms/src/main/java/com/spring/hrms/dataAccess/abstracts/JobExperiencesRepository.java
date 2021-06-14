@@ -18,4 +18,5 @@ public interface JobExperiencesRepository extends JpaRepository<JobExperiences,I
 
     List<JobExperiences> getAllByCandidateIdOrderByFinishYearDesc(int candidateId);
 
+
 }
